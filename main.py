@@ -2,40 +2,42 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def lorenz(x, y, z, r, s=10, b=2.667):
-    x_dot = s * (y - x)
-    y_dot = r * x - y - x * z
-    z_dot = x * y - b * z
-    return x_dot, y_dot, z_dot
+def calculateLorenzAttractor(x, y, z, rho, sigma=10, beta=2.667):
+    """ Calculate the Lorenz attractor derivatives. """
+    xDot = sigma * (y - x)
+    yDot = rho * x - y - x * z
+    zDot = x * y - beta * z
+    return xDot, yDot, zDot
 
 
-def simulateAndVisualizeLorenzAttractor(r):
-    dt = 0.01  # Time step
-    num_steps = 10000  # Number of steps
-    # Initialize arrays for x, y, z
-    xs = np.empty(num_steps + 1)
-    ys = np.empty(num_steps + 1)
-    zs = np.empty(num_steps + 1)
-    xs[0], ys[0], zs[0] = (7.5, 22.5, 35)  # Initial conditions
+def simulateAndVisualizeLorenzAttractor(rho):
+    timeStep = 0.01  # Time step
+    numSteps = 10000  # Number of steps
+    # Initialize arrays for x, y, z coordinates
+    xCoordinates = np.empty(numSteps + 1)
+    yCoordinates = np.empty(numSteps + 1)
+    zCoordinates = np.empty(numSteps + 1)
+    xCoordinates[0], yCoordinates[0], zCoordinates[0] = (7.5, 22.5, 35)  # Initial conditions
 
-    # Simulate the Lorenz system
-    for i in range(num_steps):
-        x_dot, y_dot, z_dot = lorenz(xs[i], ys[i], zs[i], r)
-        xs[i + 1] = xs[i] + (x_dot * dt)
-        ys[i + 1] = ys[i] + (y_dot * dt)
-        zs[i + 1] = zs[i] + (z_dot * dt)
+    # Simulate the Lorenz system over the specified number of steps
+    for i in range(numSteps):
+        xDot, yDot, zDot = calculateLorenzAttractor(xCoordinates[i], yCoordinates[i], zCoordinates[i], rho)
+        xCoordinates[i + 1] = xCoordinates[i] + (xDot * timeStep)
+        yCoordinates[i + 1] = yCoordinates[i] + (yDot * timeStep)
+        zCoordinates[i + 1] = zCoordinates[i] + (zDot * timeStep)
 
     # Create a figure and a 3D subplot
-    fig = plt.figure()
-    ax = fig.add_subplot(111, projection='3d')
-    ax.plot(xs, ys, zs, lw=0.5, color='purple')
-    ax.set_xlabel("X Axis")
-    ax.set_ylabel("Y Axis")
-    ax.set_zlabel("Z Axis")
-    ax.set_title("Lorenz Attractor: r = " + str(r))
+    figure = plt.figure()
+    axis = figure.add_subplot(111, projection='3d')
+    axis.plot(xCoordinates, yCoordinates, zCoordinates, lw=0.5, color='purple')
+    axis.set_xlabel("X Axis")
+    axis.set_ylabel("Y Axis")
+    axis.set_zlabel("Z Axis")
+    axis.set_title("Lorenz Attractor for ρ = " + str(rho))
     plt.show()
 
 
+# Example usage with a common parameter for chaotic behavior
 simulateAndVisualizeLorenzAttractor(28)
 
 # Initialize data
