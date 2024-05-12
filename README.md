@@ -8,7 +8,7 @@
 ### Running the Program:
 1. Open a terminal.
 2. Navigate to the directory containing `main.py`.
-## Set up a virtual environment
+#### Set up a virtual environment
 
 First, ensure you have \`virtualenv\` installed:
 
@@ -22,7 +22,7 @@ Then, create a virtual environment:
 python -m virtualenv venv
 ```
 
-## Activate the virtual environment
+#### Activate the virtual environment
 
 On Windows, run:
 
@@ -36,7 +36,7 @@ On macOS and Linux, run:
 source venv/bin/activate
 ```
 
-## Install required packages
+#### Install required packages
 
 Install all the required packages using the provided `requirements.txt`:
 
@@ -44,7 +44,7 @@ Install all the required packages using the provided `requirements.txt`:
 pip install -r requirements.txt
 ```
 
-## Run
+#### Run
 ```bash
 python main.py
 ```
